@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { signUp, signIn } from '../api/auth'
+import { signUp, signIn } from '../../api/auth'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-function SignUp(props) {
+function SignUp (props) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
