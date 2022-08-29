@@ -4,13 +4,14 @@ import { signUp, signIn } from '../../api/auth'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import { useAuth } from '../../contexts/authProvider'
 
 function SignUp (props) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const { setUser } = useAuth()
   const navigate = useNavigate()
-  const { setUser } = props
 
   const onSignUp = (event) => {
     event.preventDefault()
