@@ -1,10 +1,11 @@
 import './App.css';
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Outlet } from 'react-router-dom'
 
-import Home from './routes/home'
+import Header from './routes/header.jsx'
 import SignUp from './routes/auth/sign-up';
 import SignIn from './routes/auth/sign-in';
+import SignOut from './routes/auth/sign-out';
 import CreateTest from './routes/createTest';
 import Tests from './routes/tests';
 import Test from './routes/test';
@@ -19,10 +20,11 @@ export default function App() {
     <>
     <main>
       <AuthProvider>
+        <Header />
         <Routes>
-          <Route path='/' element={<Home />}>
           <Route path='sign-up' element={<SignUp/>} />
           <Route path='sign-in' element={<SignIn/>} />
+          <Route path='sign-out' element={<SignOut/>} />
           <Route path='create-test' element={
             <ProtectedRoute>
               <CreateTest />
@@ -45,7 +47,6 @@ export default function App() {
             </main>
           }
           />
-          </Route>
         </Routes>
       </AuthProvider>
     </main>

@@ -10,7 +10,7 @@ import { useAuth } from '../../contexts/authProvider'
 function SignIn (props) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { setUser } = useAuth()
+  const { user, setUser } = useAuth()
   const navigate = useNavigate()
 
   const onSignIn = (event) => {
