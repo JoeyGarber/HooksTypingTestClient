@@ -30,22 +30,10 @@ export default function App() {
               <CreateTest />
             </ProtectedRoute>} />
           <Route path='tests' element={<Tests />} >
-            <Route
-              index
-              element={
-                <main>
-                  <p>Select a Test</p>
-                </main>
-              }
-            />
             <Route path=':testId' element={<Test />} />
           </Route>
           {/* this route will match if nothing else matches */}
-          <Route path='*' element={
-            <main>
-              <p>There is nothing here!</p>
-            </main>
-          }
+          <Route path='*' element={<Tests />}
           />
         </Routes>
       </AuthProvider>

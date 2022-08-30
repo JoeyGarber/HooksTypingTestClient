@@ -7,10 +7,10 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { useAuth } from '../../contexts/authProvider'
 
-function SignIn (props) {
+function SignIn () {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { user, setUser } = useAuth()
+  const { setUser } = useAuth()
   const navigate = useNavigate()
 
   const onSignIn = (event) => {
@@ -19,7 +19,7 @@ function SignIn (props) {
     signIn({email, password})
     .then((response) => setUser(response.data.user))
     .then(() => console.log('Successfully signed in'))
-    .then(navigate('/home'))
+    .then(navigate('/tests'))
     .catch((error) => {
       setEmail('')
       setPassword('')

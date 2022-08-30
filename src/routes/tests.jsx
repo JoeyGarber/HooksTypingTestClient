@@ -1,4 +1,5 @@
 import { NavLink, Outlet, useSearchParams } from 'react-router-dom'
+import Dropdown from 'react-bootstrap/Dropdown'
 import getTests from '../data'
 
 export default function Tests() {
@@ -8,28 +9,18 @@ export default function Tests() {
   return (
     <>
       <h1>Tests</h1>
-      <input
-      value={searchParams.get('filter') || ''}
-      // This works just like state, except it also shows up in the url
-      onChange={(event) => {
-        let filter = event.target.value
-        if (filter) {
-          setSearchParams({ filter })
-        } else {
-          setSearchParams({})
-        }
-      }}
-      />
-      {tests.filter((test) => {
-        let filter = searchParams.get('filter')
-        if (!filter) return true
-        let title = test.title.toLowerCase()
-        return title.startsWith(filter.toLowerCase())
-      }).map((test) => (
-        <NavLink to={`/tests/${test._id}`}
-        key={test._id}>{test.title}</NavLink>
-      ))}
-      <Outlet />
+      <Dropdown>
+      <Dropdown.Toggle variant="primary" id="dropdown-basic">
+        Test Chooser
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+      {tests.map((test) => (
+          <Dropdown.Item key={test._id} href={`/tests/${test._id}`}>{test.title}</Dropdown.Item>
+        ))}
+      </Dropdown.Menu>
+    </Dropdown>
+    <Outlet />
     </>
   )
 }

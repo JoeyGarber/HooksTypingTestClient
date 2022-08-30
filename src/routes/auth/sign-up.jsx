@@ -20,7 +20,7 @@ function SignUp (props) {
     .then(() => signIn({email, password, passwordConfirmation}))
     .then((response) => setUser(response.data.user))
     .then(() => console.log('Sign Up Success'))
-    .then(() => navigate('/'))
+    .then(() => navigate('/tests'))
     .catch((error) => {
       setEmail('')
       setPassword('')

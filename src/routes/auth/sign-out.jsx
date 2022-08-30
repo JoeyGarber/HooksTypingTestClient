@@ -8,7 +8,7 @@ function SignOut () {
 
   signOut(user)
   .finally(() => console.log('Signed out successfully'))
-  .finally(() => navigate('/'))
+  .finally(() => navigate('/tests'))
   .finally(() => setUser(null))
 
   return ''

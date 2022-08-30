@@ -15,7 +15,11 @@ const unauthenticatedOptions = (
   <>
     <NavLink to='sign-up'>Sign Up</NavLink>
     <NavLink to='sign-in'>Sign In</NavLink>
-    <NavLink to='/'>Home</NavLink>
+  </>
+)
+
+const alwaysOptions = (
+  <>
     <NavLink to='tests'>Tests</NavLink>
   </>
 )
@@ -25,7 +29,7 @@ export default function Header () {
   return (
     <Navbar bg='dark' variant='dark' expand='md'>
       <Navbar.Brand>
-        <Link style={{ textDecoration: 'none' }} to='/tests/'>Joey's Typing Test</Link>
+        <Link style={{ textDecoration: 'none' }} to='tests'>Joey's Typing Test</Link>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
@@ -33,6 +37,7 @@ export default function Header () {
           {user && (
             <span className='navbar-text mr-2'>Welcome, {user.email}</span>
           )}
+          { alwaysOptions }
           {user ? authenticatedOptions : unauthenticatedOptions}
         </Nav>
       </Navbar.Collapse>
