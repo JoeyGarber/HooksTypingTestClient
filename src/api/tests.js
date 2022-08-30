@@ -4,7 +4,7 @@ import axios from 'axios'
 export const createTest = (data, user) => {
   return axios({
     method: 'POST',
-    route: apiUrl + '/tests/',
+    url: apiUrl + '/tests/',
     headers: {
       Authorization: `Bearer ${user.token}`
     },
@@ -20,7 +20,7 @@ export const createTest = (data, user) => {
 export const indexTests = (user) => {
   return axios({
     method: 'GET',
-    route: apiUrl + '/tests/',
+    url: apiUrl + '/tests/',
     headers: {
       Authorization: `Bearer ${user.token}`
     }
@@ -30,7 +30,7 @@ export const indexTests = (user) => {
 export const showTest = (id, user) => {
   return axios({
     method: 'GET',
-    route: apiUrl + '/tests/' + id,
+    url: apiUrl + '/tests/' + id,
     headers: {
       Authorization: `Bearer ${user.token}`
     }
@@ -40,7 +40,7 @@ export const showTest = (id, user) => {
 export const updateTest = (id, data, user) => {
   return axios({
     method: 'PATCH',
-    route: apiUrl + '/tests/' + id,
+    url: apiUrl + '/tests/' + id,
     headers: {
       Authorization: `Bearer ${user.token}`
     },
@@ -56,7 +56,7 @@ export const updateTest = (id, data, user) => {
 export const deleteTest = (id, user) => {
   return axios({
     method: 'DELETE',
-    route: apiUrl + '/tests/' + id,
+    url: apiUrl + '/tests/' + id,
     headers: {
       Authorization: `Bearer ${user.token}`
     }
