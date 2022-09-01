@@ -17,23 +17,27 @@ export const createTest = (data, user) => {
   })
 }
 
-export const indexTests = (user) => {
+export const indexUserTests = (user) => {
   return axios({
     method: 'GET',
-    url: apiUrl + '/tests/',
+    url: apiUrl + '/user-tests/',
     headers: {
       Authorization: `Bearer ${user.token}`
     }
   })
 }
 
-export const showTest = (id, user) => {
+export const indexTests = (user) => {
+  return axios({
+    method: 'GET',
+    url: apiUrl + '/tests/'
+  })
+}
+
+export const showTest = (id) => {
   return axios({
     method: 'GET',
     url: apiUrl + '/tests/' + id,
-    headers: {
-      Authorization: `Bearer ${user.token}`
-    }
   })
 }
 

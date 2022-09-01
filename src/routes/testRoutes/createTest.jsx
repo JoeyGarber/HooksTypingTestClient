@@ -1,9 +1,9 @@
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { useState } from 'react'
-import { createTest } from '../api/tests'
+import { createTest } from '../../api/tests'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../contexts/authProvider'
+import { useAuth } from '../../contexts/authProvider'
 
 
 export default function CreateTest() {

@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-import { useAuth } from '../contexts/authProvider'
+import { useAuth } from '../../contexts/authProvider'
 
 
 const authenticatedOptions = (

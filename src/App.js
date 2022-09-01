@@ -2,16 +2,16 @@ import './App.css';
 import React from 'react'
 import { Routes, Route, Outlet } from 'react-router-dom'
 
-import Header from './routes/header.jsx'
+import Header from './routes/header/header.jsx'
 import SignUp from './routes/auth/sign-up';
 import SignIn from './routes/auth/sign-in';
 import SignOut from './routes/auth/sign-out';
-import CreateTest from './routes/createTest';
-import Tests from './routes/tests';
-import Test from './routes/test';
+import CreateTest from './routes/testRoutes/createTest';
+import Tests from './routes/testRoutes/tests';
+import Test from './routes/testRoutes/test';
 
 import { AuthProvider } from './contexts/authProvider';
-import { ProtectedRoute } from './routes/protectedRoute';
+import { ProtectedRoute } from './routes/protectedRoute/protectedRoute';
 
 
 export default function App() {
