@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, NavLink, Outlet } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { indexTests, indexUserTests } from '../../api/tests'
 import { useAuth } from '../../contexts/authProvider'
@@ -39,7 +39,7 @@ export default function Tests() {
 
       <Dropdown.Menu>
       {tests.map((test) => (
-          <Dropdown.Item key={test._id} as={Link} to={`/tests/${test._id}`}>{test.title}</Dropdown.Item>
+        <Dropdown.Item key={test._id} as={Link} to={`/tests/${test._id}`}>{test.title}</Dropdown.Item>
         ))}
       {userTests.map((test) => (
         <Dropdown.Item key={test._id} as={Link} to={`/tests/${test._id}`}>{test.title}</Dropdown.Item>

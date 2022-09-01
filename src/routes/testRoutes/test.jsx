@@ -16,6 +16,10 @@ export default function Test () {
       })
   }, [])
 
+  const getTest = (_id) => {
+    return 
+  }
+
   return (
     <>
         {test &&

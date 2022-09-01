@@ -29,9 +29,8 @@ export default function App() {
             <ProtectedRoute>
               <CreateTest />
             </ProtectedRoute>} />
-          <Route path='tests' element={<Tests />} >
-            <Route path=':testId' element={<Test />} />
-          </Route>
+          <Route path='tests' element={<Tests />} />
+          <Route path='tests/:testId' element={<Test />} />
           {/* this route will match if nothing else matches */}
           <Route path='*' element={<Tests />}
           />
