@@ -5,10 +5,10 @@ import { useAuth } from "../../contexts/authProvider"
 
 export default function Test () {
   const [test, setTest] = useState(null)
-  const [currInput, setCurrInput] = useState('')
-  const [charIndex, setCharIndex] = useState(0)
+  const [userInput, setUserInput] = useState('')
   const [correct, setCorrect] = useState(0)
   const [incorrect, setIncorrect] = useState(0)
+  const [charIndex, setCharIndex] = useState(0)
 
   const params = useParams()
   const { user }  = useAuth()
@@ -18,25 +18,42 @@ export default function Test () {
       .then(response => {
         setTest(response.data.test.body.split(''))
       })
-  }, [])
+  }, [params.testId, user])
 
-  const checkMatch = () => {
-    let typedChar = currInput.split('')[charIndex]
-    // If the user has typed a char and the char isn't Shift
-    if (typedChar && typedChar.charCodeAt(0) !== 13) {
-      if (typedChar === test[charIndex]) {
-        console.log('correct')
+  const checkMatch = (event) => {
+    const characters = document.querySelector('.typing-text p').querySelectorAll('span')
+
+    // non-character keys will be undefined && the test won't error when you finish it
+    if (userInput[charIndex] && characters[charIndex]) {
+      // console.log("userInput[charIndex]: " + userInput[charIndex])
+      // console.log("characters[charIndex]: " + characters[charIndex].innerHTML)
+      // console.log(charIndex)
+
+      if (userInput[charIndex] === characters[charIndex].innerHTML) {
+        characters[charIndex].classList.add('correct')
+        setCorrect(correct + 1)
       } else {
-        console.log('incorrect')
+        characters[charIndex].classList.add('incorrect')
+        setIncorrect(incorrect + 1)
       }
       setCharIndex(charIndex + 1)
+    } else if (event.key === 'Backspace' && charIndex > 0) {
+      console.log(characters[charIndex-1].className)
+
+      if (characters[charIndex-1].className === 'correct') {
+        setCorrect(correct - 1)
+      } else if (characters[charIndex - 1].className === 'incorrect') {
+        setIncorrect(incorrect - 1)
+      }
+      characters[charIndex - 1].classList.remove('correct', 'incorrect')
+      setCharIndex(charIndex - 1)
     }
-  }
+}
 
   return (
     <div className='app'>
       <div className='control is-expanded section'>
-        <div className='content'>
+        <div className='typing-text'>
             <p>
               {test && test.map((char, charIndex) => {
                 return (
@@ -45,7 +62,7 @@ export default function Test () {
               })}
             </p>
         </div>
-        <input type='text' className='input' onKeyUp={checkMatch} value={currInput} onChange={(e) => setCurrInput(e.target.value)}/>
+        <input type='text' className='input' onKeyUp={checkMatch}  onChange={(e) => setUserInput(e.target.value)}/>
       </div>
       <div className='section'>
         <div className='column'>
