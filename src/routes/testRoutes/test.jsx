@@ -24,12 +24,8 @@ export default function Test () {
     const characters = document.querySelector('.typing-text p').querySelectorAll('span')
 
     // non-character keys will be undefined && the test won't error when you finish it
-    if (userInput[charIndex] && characters[charIndex]) {
-      // console.log("userInput[charIndex]: " + userInput[charIndex])
-      // console.log("characters[charIndex]: " + characters[charIndex].innerHTML)
-      // console.log(charIndex)
-
-      if (userInput[charIndex] === characters[charIndex].innerHTML) {
+    if (event.key && characters[charIndex] && event.key !== 'Shift' && event.key !== 'Backspace') {
+      if (event.key === characters[charIndex].innerHTML) {
         characters[charIndex].classList.add('correct')
         setCorrect(correct + 1)
       } else {
