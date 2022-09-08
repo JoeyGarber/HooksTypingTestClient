@@ -62,7 +62,7 @@ export default function Test () {
               })}
             </p>
         </div>
-        <input type='text' className='input' onKeyUp={checkMatch}  onChange={(e) => setUserInput(e.target.value)}/>
+        <input type='text' className='input' onKeyDown={checkMatch}  onChange={(e) => setUserInput(e.target.value)}/>
       </div>
       <div className='section'>
         <div className='column'>
