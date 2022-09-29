@@ -2,6 +2,16 @@ import React, { useState, createContext, useContext } from 'react'
 
 const AuthContext = createContext(null)
 
+const useAuth = () => {
+  const context = useContext(AuthContext)
+
+  if (context === undefined) {
+    throw new Error("useAuth was used outside of its provider")
+  }
+
+  return context
+}
+
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
 
@@ -18,16 +28,6 @@ const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   )
-}
-
-const useAuth = () => {
-  const context = useContext(AuthContext)
-
-  if (context === undefined) {
-    throw new Error("useAuth was used outside of its provider")
-  }
-
-  return context
 }
 
 export { AuthProvider, useAuth }

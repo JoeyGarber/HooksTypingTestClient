@@ -1,7 +1,7 @@
 import './App.css';
 import './index.css'
 import React from 'react'
-import { Routes, Route, Outlet } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 import Header from './routes/header/header.jsx'
 import SignUp from './routes/auth/sign-up';
