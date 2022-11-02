@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom"
 import { useEffect, useState, useRef } from 'react'
 import { showTest } from "../../api/tests"
 import { useAuth } from "../../contexts/authProvider"
+import { deleteTest } from "../../api/tests"
+import { Button } from 'semantic-ui-react'
 
 export default function Test () {
   const SECONDS = 10
@@ -13,6 +15,7 @@ export default function Test () {
   const [countDown, setCountDown] = useState(SECONDS)
   const [timerRunning, setTimerRunning] = useState(false)
   const [disableInput, setDisableInput] = useState(false)
+  const [confirmOpen, setConfirmOpen] = useState(false)
 
   const params = useParams()
   const { user }  = useAuth()
@@ -77,7 +80,11 @@ export default function Test () {
       setTimerRunning(false)
       setDisableInput(true)
     }
-}
+  }
+
+  const deleteUserTest = () => {
+    deleteTest(params.testId, user)
+  }
 
   return (
     <div className='app'>
@@ -105,6 +112,11 @@ export default function Test () {
           <p>{Math.round((correct / (correct + incorrect)) * 100)} %</p>
         </div>
       </div>
+      {!confirmOpen && <Button onClick={() => setConfirmOpen(true)}>Delete test</Button>}
+      {confirmOpen && <>
+      <Button onClick={() => deleteUserTest()}>Confirm</Button>
+      <Button onClick={() => setConfirmOpen(false)}>Cancel</Button>
+      </>}
     </div>
   )
 }
