@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { useEffect, useState, useRef } from 'react'
 import { showTest } from "../../api/tests"
 import { useAuth } from "../../contexts/authProvider"
@@ -9,6 +9,7 @@ export default function Test () {
   const SECONDS = 10
 
   const [test, setTest] = useState(null)
+  const [testUser, setTestUser] = useState(null)
   const [correct, setCorrect] = useState(0)
   const [incorrect, setIncorrect] = useState(0)
   const [charIndex, setCharIndex] = useState(0)
@@ -20,12 +21,14 @@ export default function Test () {
   const params = useParams()
   const { user }  = useAuth()
   const Ref = useRef()
+  const navigate = useNavigate()
 
   // Get the test when this component renders, as denoted by when the params.testId changes
   useEffect(() => {
       showTest(params.testId, user)
       .then(response => {
         setTest(response.data.test.body.split(''))
+        setTestUser(response.data.test.owner)
       })
   }, [params.testId, user])
 
@@ -84,6 +87,8 @@ export default function Test () {
 
   const deleteUserTest = () => {
     deleteTest(params.testId, user)
+    .then(navigate('/tests'))
+    .catch((error) => console.error(error))
   }
 
   return (
@@ -112,7 +117,7 @@ export default function Test () {
           <p>{Math.round((correct / (correct + incorrect)) * 100)} %</p>
         </div>
       </div>
-      {!confirmOpen && <Button onClick={() => setConfirmOpen(true)}>Delete test</Button>}
+      {user && user._id === testUser && !confirmOpen && <Button onClick={() => setConfirmOpen(true)}>Delete test</Button>}
       {confirmOpen && <>
       <Button onClick={() => deleteUserTest()}>Confirm</Button>
       <Button onClick={() => setConfirmOpen(false)}>Cancel</Button>
