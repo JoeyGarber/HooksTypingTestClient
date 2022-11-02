@@ -38,7 +38,7 @@ export default function Test () {
         if (prevCountdown === 0) {
           clearInterval(Ref.current)
           setTimerRunning(false)
-          return SECONDS
+          return 0
         } else {
           return prevCountdown - 1
         }
