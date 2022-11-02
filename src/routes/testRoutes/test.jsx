@@ -12,6 +12,7 @@ export default function Test () {
   const [charIndex, setCharIndex] = useState(0)
   const [countDown, setCountDown] = useState(SECONDS)
   const [timerRunning, setTimerRunning] = useState(false)
+  const [disableInput, setDisableInput] = useState(false)
 
   const params = useParams()
   const { user }  = useAuth()
@@ -32,6 +33,8 @@ export default function Test () {
   }, [timerRunning])
 
   const start = () => {
+    // Correct and incorrect update before onChange
+    // This makes it so the timer starts only after user has typed their first char
     if ((correct === 1 && incorrect === 0) || (correct === 0 && incorrect === 1)) {
       setTimerRunning(true)
       Ref.current = setInterval(() => {
@@ -39,6 +42,7 @@ export default function Test () {
           if (prevCountdown === 0) {
             clearInterval(Ref.current)
             setTimerRunning(false)
+            setDisableInput(true)
             return 0
           } else {
             return prevCountdown - 1
@@ -71,6 +75,7 @@ export default function Test () {
       setCharIndex(charIndex - 1)
     } else if (!characters[charIndex]) {
       setTimerRunning(false)
+      setDisableInput(true)
     }
 }
 
@@ -88,7 +93,7 @@ export default function Test () {
             </p>
         </div>
         <p>Start typing to begin timer.</p>
-        <input type='text' className='input' autoFocus onKeyDown={checkMatch} onChange={start}/>
+        <input type='text' className='input' autoFocus disabled={disableInput} onKeyDown={checkMatch} onChange={start}/>
       </div>
       <div className='section'>
         <div className='column'>
