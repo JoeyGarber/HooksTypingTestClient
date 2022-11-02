@@ -32,18 +32,20 @@ export default function Test () {
   }, [timerRunning])
 
   const start = () => {
-    setTimerRunning(true)
-    Ref.current = setInterval(() => {
-      setCountDown((prevCountdown) => {
-        if (prevCountdown === 0) {
-          clearInterval(Ref.current)
-          setTimerRunning(false)
-          return 0
-        } else {
-          return prevCountdown - 1
-        }
-      })
-    }, 1000)
+    if ((correct === 1 && incorrect === 0) || (correct === 0 && incorrect === 1)) {
+      setTimerRunning(true)
+      Ref.current = setInterval(() => {
+        setCountDown((prevCountdown) => {
+          if (prevCountdown === 0) {
+            clearInterval(Ref.current)
+            setTimerRunning(false)
+            return 0
+          } else {
+            return prevCountdown - 1
+          }
+        })
+      }, 1000)
+    }
   }
 
   const checkMatch = (event) => {
@@ -85,15 +87,13 @@ export default function Test () {
               })}
             </p>
         </div>
-        <input type='text' className='input' disabled={timerRunning !== true} onKeyDown={checkMatch}/>
+        <p>Start typing to begin timer.</p>
+        <input type='text' className='input' autoFocus onKeyDown={checkMatch} onChange={start}/>
       </div>
       <div className='section'>
         <div className='column'>
           <p>Words per minute (one word = 5 chars):</p>
           <p>{Math.round((correct * 12) / (SECONDS - countDown), 2)}</p>
-        </div>
-        <div>
-          <button className='start' onClick={start}>Start</button>
         </div>
         <div className='column'>
           <p>Accuracy:</p>
