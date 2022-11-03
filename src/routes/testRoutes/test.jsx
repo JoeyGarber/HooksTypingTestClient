@@ -20,7 +20,8 @@ export default function Test () {
 
   const params = useParams()
   const { user }  = useAuth()
-  const Ref = useRef()
+  const IntervalRef = useRef()
+  const InputRef = useRef()
   const navigate = useNavigate()
 
   // Get the test when this component renders, as denoted by when the params.testId changes
@@ -32,9 +33,10 @@ export default function Test () {
       })
   }, [params.testId, user])
 
+  // When the clock hits zero or the user types all the text, stop the interval
   useEffect(() => {
     if (timerRunning === false) {
-      clearInterval(Ref.current)
+      clearInterval(IntervalRef.current)
     }
   }, [timerRunning])
 
@@ -43,10 +45,9 @@ export default function Test () {
     // This makes it so the timer starts only after user has typed their first char
     if ((correct === 1 && incorrect === 0) || (correct === 0 && incorrect === 1)) {
       setTimerRunning(true)
-      Ref.current = setInterval(() => {
+      IntervalRef.current = setInterval(() => {
         setCountDown((prevCountdown) => {
           if (prevCountdown === 0) {
-            clearInterval(Ref.current)
             setTimerRunning(false)
             setDisableInput(true)
             return 0
@@ -91,6 +92,17 @@ export default function Test () {
     .catch((error) => console.error(error))
   }
 
+  const resetTest = () => {
+    setCorrect(0)
+    setIncorrect(0)
+    setCharIndex(0)
+    setCountDown(SECONDS)
+    setTimerRunning(false)
+    setDisableInput(false)
+    InputRef.current.value = ''
+    document.querySelector('.typing-text p').querySelectorAll('span').forEach(span => span.classList.remove('correct', 'incorrect'))
+  }
+
   return (
     <div className='app'>
       <div className='control is-expanded section'>
@@ -105,23 +117,25 @@ export default function Test () {
             </p>
         </div>
         <p>Start typing to begin timer.</p>
-        <input type='text' className='input' autoFocus disabled={disableInput} onKeyDown={checkMatch} onChange={start}/>
+        <input type='text' className='input' ref={InputRef} autoFocus disabled={disableInput} onKeyDown={checkMatch} onChange={start}/>
       </div>
       <div className='section'>
         <div className='column'>
-          <p>Words per minute (one word = 5 chars):</p>
-          <p>{Math.round((correct * 12) / (SECONDS - countDown), 2)}</p>
+          <h5>Words per minute (one word = 5 chars):</h5>
+          <p>{Math.round((correct * 12) / (SECONDS - countDown), 2) || 0}</p>
         </div>
         <div className='column'>
-          <p>Accuracy:</p>
-          <p>{Math.round((correct / (correct + incorrect)) * 100)} %</p>
+          <h5>Accuracy:</h5>
+          <p>{Math.round((correct / (correct + incorrect)) * 100) || 0} %</p>
         </div>
       </div>
+      <Button onClick={resetTest}>Reset Test</Button>
       {user && user._id === testUser && !confirmOpen && <Button onClick={() => setConfirmOpen(true)}>Delete test</Button>}
       {confirmOpen && <>
-      <Button onClick={() => deleteUserTest()}>Confirm</Button>
+      <Button onClick={deleteUserTest}>Confirm</Button>
       <Button onClick={() => setConfirmOpen(false)}>Cancel</Button>
       </>}
+      <Button onClick={() => console.log(user)}>Show stuff</Button>
     </div>
   )
 }
