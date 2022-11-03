@@ -7,7 +7,7 @@ import { createResult } from "../../api/results"
 import { Button } from 'semantic-ui-react'
 
 export default function Test () {
-  const SECONDS = 60
+  const SECONDS = 3
 
   const [test, setTest] = useState(null)
   const [testUser, setTestUser] = useState(null)
@@ -52,8 +52,11 @@ export default function Test () {
       IntervalRef.current = setInterval(() => {
         setCountDown((prevCountdown) => {
           if (prevCountdown === 0) {
+            console.log(wpm)
             setTimerRunning(false)
             setDisableInput(true)
+            // handleSubmit(correct * (0.2), accuracy)
+            console.log(wpm)
             return 0
           } else {
             return prevCountdown - 1
