@@ -10,3 +10,20 @@ export const indexResults = (user) => {
     }
   })
 }
+
+export const createResult = (WPM, Accuracy, testId, user) => {
+  return axios({
+    method: 'POST',
+    url: apiUrl + '/results',
+    headers: {
+      Authorization: `Bearer ${user.token}`
+    },
+    data: {
+      results: {
+        WPM,
+        Accuracy,
+        Test: testId
+      }
+    }
+  })
+}

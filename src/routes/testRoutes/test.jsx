@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react'
 import { showTest } from "../../api/tests"
 import { useAuth } from "../../contexts/authProvider"
 import { deleteTest } from "../../api/tests"
+import { createResult } from "../../api/results"
 import { Button } from 'semantic-ui-react'
 
 export default function Test () {
@@ -23,6 +24,9 @@ export default function Test () {
   const IntervalRef = useRef()
   const InputRef = useRef()
   const navigate = useNavigate()
+
+  let wpm = Math.round((correct * 12) / (SECONDS - countDown), 2)
+  let accuracy = Math.round((correct / (correct + incorrect)) * 100)
 
   // Get the test when this component renders, as denoted by when the params.testId changes
   useEffect(() => {
@@ -83,6 +87,7 @@ export default function Test () {
     } else if (!characters[charIndex]) {
       setTimerRunning(false)
       setDisableInput(true)
+      handleSubmit(wpm, accuracy)
     }
   }
 
@@ -101,6 +106,14 @@ export default function Test () {
     setDisableInput(false)
     InputRef.current.value = ''
     document.querySelector('.typing-text p').querySelectorAll('span').forEach(span => span.classList.remove('correct', 'incorrect'))
+  }
+
+  const handleSubmit = (wpm, accuracy) => {
+    if (user) {
+      createResult(wpm, accuracy, params.testId, user)
+      .then(() => console.log('worked'))
+      .catch((error) => console.log(error))
+    }
   }
 
   return (
@@ -122,11 +135,11 @@ export default function Test () {
       <div className='section'>
         <div className='column'>
           <h5>Words per minute (one word = 5 chars):</h5>
-          <p>{Math.round((correct * 12) / (SECONDS - countDown), 2) || 0}</p>
+          <p>{wpm || 0}</p>
         </div>
         <div className='column'>
           <h5>Accuracy:</h5>
-          <p>{Math.round((correct / (correct + incorrect)) * 100) || 0} %</p>
+          <p>{accuracy || 0} %</p>
         </div>
       </div>
       <Button onClick={resetTest}>Reset Test</Button>

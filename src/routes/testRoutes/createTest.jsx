@@ -14,7 +14,6 @@ export default function CreateTest() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-
     createTest({title: title, body: text}, user)
     .then(console.log('Test created successfully'))
     .then(navigate('/tests'))
