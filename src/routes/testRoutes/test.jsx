@@ -6,7 +6,7 @@ import { deleteTest } from "../../api/tests"
 import { Button } from 'semantic-ui-react'
 
 export default function Test () {
-  const SECONDS = 10
+  const SECONDS = 60
 
   const [test, setTest] = useState(null)
   const [testUser, setTestUser] = useState(null)

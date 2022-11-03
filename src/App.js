@@ -10,6 +10,7 @@ import SignOut from './routes/auth/sign-out';
 import CreateTest from './routes/testRoutes/createTest';
 import Tests from './routes/testRoutes/tests';
 import Test from './routes/testRoutes/test';
+import Results from './routes/testRoutes/results.jsx'
 
 import { AuthProvider } from './contexts/authProvider';
 import { ProtectedRoute } from './routes/protectedRoute/protectedRoute';
@@ -32,6 +33,7 @@ export default function App() {
             </ProtectedRoute>} />
           <Route path='tests' element={<Tests />} />
           <Route path='tests/:testId' element={<Test />} />
+          <Route path='results' element={<Results />} />
           {/* this route will match if nothing else matches */}
           <Route path='*' element={<Tests />}
           />

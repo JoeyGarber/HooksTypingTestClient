@@ -8,6 +8,7 @@ const authenticatedOptions = (
   <>    
     <NavLink to='sign-out'>Sign Out</NavLink>
     <NavLink to='create-test'>Create Test</NavLink>
+    <NavLink to='results'>Results</NavLink>
   </>
 )
 
