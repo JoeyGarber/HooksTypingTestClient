@@ -7,7 +7,7 @@ import { createResult } from "../../api/results"
 import { Button } from 'semantic-ui-react'
 
 export default function Test () {
-  const SECONDS = 3
+  const SECONDS = 10
 
   const [test, setTest] = useState(null)
   const [testUser, setTestUser] = useState(null)
@@ -15,7 +15,7 @@ export default function Test () {
   const [incorrect, setIncorrect] = useState(0)
   const [charIndex, setCharIndex] = useState(0)
   const [countDown, setCountDown] = useState(SECONDS)
-  const [timerRunning, setTimerRunning] = useState(false)
+  const [timerRunning, setTimerRunning] = useState(null)
   const [disableInput, setDisableInput] = useState(false)
   const [confirmOpen, setConfirmOpen] = useState(false)
 
@@ -41,6 +41,7 @@ export default function Test () {
   useEffect(() => {
     if (timerRunning === false) {
       clearInterval(IntervalRef.current)
+      handleSubmit(wpm, accuracy)
     }
   }, [timerRunning])
 
@@ -52,11 +53,8 @@ export default function Test () {
       IntervalRef.current = setInterval(() => {
         setCountDown((prevCountdown) => {
           if (prevCountdown === 0) {
-            console.log(wpm)
             setTimerRunning(false)
             setDisableInput(true)
-            // handleSubmit(correct * (0.2), accuracy)
-            console.log(wpm)
             return 0
           } else {
             return prevCountdown - 1
@@ -90,7 +88,6 @@ export default function Test () {
     } else if (!characters[charIndex]) {
       setTimerRunning(false)
       setDisableInput(true)
-      handleSubmit(wpm, accuracy)
     }
   }
 
@@ -105,7 +102,7 @@ export default function Test () {
     setIncorrect(0)
     setCharIndex(0)
     setCountDown(SECONDS)
-    setTimerRunning(false)
+    setTimerRunning(null)
     setDisableInput(false)
     InputRef.current.value = ''
     document.querySelector('.typing-text p').querySelectorAll('span').forEach(span => span.classList.remove('correct', 'incorrect'))
