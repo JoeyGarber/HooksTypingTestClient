@@ -25,13 +25,21 @@ export default function Results () {
           <th>Accuracy</th>
         </tr>
         </thead>
-        {results && results.map((result) =>
-            <tr key={result._id}>
-              <td>{result.Test.title}</td>
-              <td>{result.WPM}</td>
-              <td>{result.Accuracy}</td>
-            </tr>
-        )}
+        <tbody>
+          {results && results.map((result) => {
+            // Filter out results from deleted tests
+              if (result.Test) {
+                return (
+                  <tr key={result._id}>
+                  <td>{result.Test && result.Test.title}</td>
+                  <td>{result.WPM}</td>
+                  <td>{result.Accuracy}</td>
+                  </tr>
+                )
+              }
+            }
+          )}
+        </tbody>
       </table>
       
     </>
