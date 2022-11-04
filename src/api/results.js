@@ -27,3 +27,13 @@ export const createResult = (WPM, Accuracy, testId, user) => {
     }
   })
 }
+
+export const deleteResults = (id, user) => {
+  return axios({
+    method: 'DELETE',
+    url: apiUrl + '/results/' + id,
+    headers: {
+      Authorization: `Bearer ${user.token}`
+    }
+  })
+}

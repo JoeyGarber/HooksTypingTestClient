@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react'
 import { showTest } from "../../api/tests"
 import { useAuth } from "../../contexts/authProvider"
 import { deleteTest } from "../../api/tests"
-import { createResult } from "../../api/results"
+import { createResult, deleteResults } from "../../api/results"
 import { Button } from 'semantic-ui-react'
 
 export default function Test () {
@@ -93,6 +93,7 @@ export default function Test () {
 
   const deleteUserTest = () => {
     deleteTest(params.testId, user)
+    .then(deleteResults(params.testId, user))
     .then(navigate('/tests'))
     .catch((error) => console.error(error))
   }
@@ -121,6 +122,8 @@ export default function Test () {
       <div className='control is-expanded section'>
         <div className='typing-text'>
             <h2>{countDown}</h2>
+            <h3>Token: {user && user.token}</h3>
+            <h3>TestId: {params.testId}</h3>
             <p>
               {test && test.map((char, charIndex) => {
                 return (
