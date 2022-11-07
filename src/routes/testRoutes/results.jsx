@@ -17,7 +17,7 @@ export default function Results () {
 
   if (sortedField !== null && sortedField !== 'Title') {
     results.sort((a, b) => {
-      return a[sortedField] - b[sortedField]
+      return b[sortedField] - a[sortedField]
     })
   } else if (sortedField === 'Title') {
     results.sort((a, b) => {
@@ -34,7 +34,6 @@ export default function Results () {
   return (
     <>
       <h3>Click Table Header to Sort Table</h3>
-      <button onClick={() => setSortedField('createdAt')}>Click me</button>
       <table>
         <thead>
         <tr>
@@ -50,7 +49,7 @@ export default function Results () {
         </tr>
         </thead>
         <tbody>
-          {results && results.map((result) => {
+          {results && results.map(result => {
             // Filter out results from deleted tests.
             // Should not be a problem anyway, because results delete for
             // deleted tests, but serves as a failsafe
