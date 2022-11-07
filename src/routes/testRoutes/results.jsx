@@ -6,6 +6,7 @@ import { indexResults } from "../../api/results"
 
 export default function Results () {
   const [results, setResults] = useState(null)
+  const [sortedField, setSortedField] = useState(null)
 
   const { user } = useAuth()
 
@@ -14,20 +15,45 @@ export default function Results () {
     .then(results => setResults(results.data.results))
   }, [user])
 
+  if (sortedField !== null && sortedField !== 'Title') {
+    results.sort((a, b) => {
+      return a[sortedField] - b[sortedField]
+    })
+  } else if (sortedField === 'Title') {
+    results.sort((a, b) => {
+      if (a.Test.title < b.Test.title) {
+        return -1
+      }
+      if (a.Test.title > b.Test.title) {
+        return 1
+      }
+      return 0
+    })
+  }
 
   return (
     <>
+      <h3>Click Table Header to Sort Table</h3>
+      <button onClick={() => setSortedField('createdAt')}>Click me</button>
       <table>
         <thead>
         <tr>
-          <th>Title</th>
-          <th>WPM</th>
-          <th>Accuracy</th>
+          <th>
+            <button type='button' onClick={() => setSortedField('Title')}>Title</button>
+          </th>
+          <th>
+            <button type='button' onClick={() => setSortedField('WPM')}>WPM</button>
+          </th>
+          <th>
+            <button type='button' onClick={() => setSortedField('Accuracy')}>Accuracy</button>
+          </th>
         </tr>
         </thead>
         <tbody>
           {results && results.map((result) => {
-            // Filter out results from deleted tests
+            // Filter out results from deleted tests.
+            // Should not be a problem anyway, because results delete for
+            // deleted tests, but serves as a failsafe
               if (result.Test) {
                 return (
                   <tr key={result._id}>

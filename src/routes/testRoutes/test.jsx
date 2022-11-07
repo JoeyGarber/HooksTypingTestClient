@@ -7,7 +7,7 @@ import { createResult, deleteResults } from "../../api/results"
 import { Button } from 'semantic-ui-react'
 
 export default function Test () {
-  const SECONDS = 10
+  const SECONDS = 60
 
   const [test, setTest] = useState(null)
   const [testUser, setTestUser] = useState(null)
@@ -42,6 +42,8 @@ export default function Test () {
     if (timerRunning === false) {
       clearInterval(IntervalRef.current)
       handleSubmit(wpm, accuracy)
+    } else if (timerRunning === null) {
+      clearInterval(IntervalRef.current)
     }
   }, [timerRunning])
 
@@ -151,7 +153,6 @@ export default function Test () {
       <Button onClick={deleteUserTest}>Confirm</Button>
       <Button onClick={() => setConfirmOpen(false)}>Cancel</Button>
       </>}
-      <Button onClick={() => console.log(user)}>Show stuff</Button>
     </div>
   )
 }
