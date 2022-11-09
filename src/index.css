@@ -14,6 +14,23 @@ code {
     monospace;
 }
 
+a:link {
+  display: flex;
+  align-items: center;
+  padding: 0.3em;
+  text-decoration: none;
+}
+
+.welcome {
+  padding: 0.3em;
+}
+
+.test-chooser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .typing-text p span{
   position: relative;
 }
@@ -29,3 +46,27 @@ code {
   border-radius: 4px;
 }
 
+.timer {
+  display: flex;
+  justify-content: center;
+}
+
+.test {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

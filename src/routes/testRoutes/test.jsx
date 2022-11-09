@@ -121,11 +121,9 @@ export default function Test () {
 
   return (
     <div className='app'>
-      <div className='control is-expanded section'>
+      <div className='test control is-expanded section'>
         <div className='typing-text'>
-            <h2>{countDown}</h2>
-            <h3>Token: {user && user.token}</h3>
-            <h3>TestId: {params.testId}</h3>
+            <h2 class="timer">Seconds Left: {countDown}</h2>
             <p>
               {test && test.map((char, charIndex) => {
                 return (
@@ -137,22 +135,23 @@ export default function Test () {
         <p>Start typing to begin timer.</p>
         <input type='text' className='input' ref={InputRef} autoFocus disabled={disableInput} onKeyDown={checkMatch} onChange={start}/>
       </div>
-      <div className='section'>
+      <div className='stats section'>
         <div className='column'>
-          <h5>Words per minute (one word = 5 chars):</h5>
-          <p>{wpm || 0}</p>
+          <h5>Words per minute (one word = 5 chars): {wpm || 0}</h5>
         </div>
         <div className='column'>
-          <h5>Accuracy:</h5>
-          <p>{accuracy || 0} %</p>
+          <h5>Accuracy: {accuracy || 0} %</h5>
         </div>
+        
       </div>
-      <Button onClick={resetTest}>Reset Test</Button>
-      {user && user._id === testUser && !confirmOpen && <Button onClick={() => setConfirmOpen(true)}>Delete test</Button>}
-      {confirmOpen && <>
-      <Button onClick={deleteUserTest}>Confirm</Button>
-      <Button onClick={() => setConfirmOpen(false)}>Cancel</Button>
-      </>}
+      <div class="buttons">
+        <Button onClick={resetTest}>Reset Test</Button>
+        {user && user._id === testUser && !confirmOpen && <Button onClick={() => setConfirmOpen(true)}>Delete test</Button>}
+        {confirmOpen && <>
+        <Button onClick={deleteUserTest}>Confirm</Button>
+        <Button onClick={() => setConfirmOpen(false)}>Cancel</Button>
+        </>}
+      </div>
     </div>
   )
 }

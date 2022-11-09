@@ -30,7 +30,7 @@ export default function Tests() {
 
 
   return (
-    <>
+    <div class="test-chooser">
       <h1>Tests</h1>
       <Dropdown>
       <Dropdown.Toggle variant="primary" id="dropdown-basic">
@@ -47,6 +47,6 @@ export default function Tests() {
       </Dropdown.Menu>
     </Dropdown>
     <Outlet />
-    </>
+    </div>
   )
 }

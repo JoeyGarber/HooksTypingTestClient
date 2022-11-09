@@ -21,8 +21,8 @@ export default function CreateTest() {
   }
 
   return (
-    <div>
-      <h2>Create Task</h2>
+    <div className='col-sm-10 col-md-8 mx-auto mt-5'>
+      <h2>Create Test</h2>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId='title'>
           <Form.Label><span style={{ color: 'red' }}>*</span>Title</Form.Label>

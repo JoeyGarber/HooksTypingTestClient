@@ -36,7 +36,7 @@ export default function Header () {
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='ml-auto d-flex justify-content-between'>
           {user && (
-            <span className='navbar-text mr-2'>Welcome, {user.email}</span>
+            <span className='welcome navbar-text mr-2'>Welcome, {user.email}</span>
           )}
           { alwaysOptions }
           {user ? authenticatedOptions : unauthenticatedOptions}
