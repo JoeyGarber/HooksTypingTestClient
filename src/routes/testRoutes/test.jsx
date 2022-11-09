@@ -123,7 +123,7 @@ export default function Test () {
     <div className='app'>
       <div className='test control is-expanded section'>
         <div className='typing-text'>
-            <h2 class="timer">Seconds Left: {countDown}</h2>
+            <h2 className="timer">Seconds Left: {countDown}</h2>
             <p>
               {test && test.map((char, charIndex) => {
                 return (
@@ -144,7 +144,7 @@ export default function Test () {
         </div>
         
       </div>
-      <div class="buttons">
+      <div className="buttons">
         <Button onClick={resetTest}>Reset Test</Button>
         {user && user._id === testUser && !confirmOpen && <Button onClick={() => setConfirmOpen(true)}>Delete test</Button>}
         {confirmOpen && <>

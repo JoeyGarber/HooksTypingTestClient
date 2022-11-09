@@ -12,10 +12,12 @@ export default function Results () {
 
   useEffect(() => {
     indexResults(user)
-    .then(results => setResults(results.data.results))
+    .then(results => {
+      setResults(results.data.results)
+    })
   }, [user])
 
-  if (sortedField !== null && sortedField !== 'Title') {
+  if (sortedField !== null && sortedField !== 'Title' && sortedField !== 'createdAt') {
     results.sort((a, b) => {
       return b[sortedField] - a[sortedField]
     })
@@ -29,10 +31,22 @@ export default function Results () {
       }
       return 0
     })
+  } else if (sortedField === 'createdAt') {
+    results.sort((a, b) => {
+      if (a.createdAt > b.createdAt) {
+        return -1
+      }
+      if (a.createdAt < b.createdAt) {
+        return 1
+      }
+      return 0
+    })
   }
 
   return (
     <>
+      <button type='button' onClick={() => setSortedField('createdAt')}>Chronologically</button>
+      <button type='button' onClick={() => console.log(results[0])}>Show me stuff</button>
       <h3>Click Table Header to Sort Table</h3>
       <table>
         <thead>
