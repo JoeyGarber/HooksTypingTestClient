@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Hooks Typing Test Client: A Typing Speed Test With User Uploaded Tests
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This application allows users to type along with pre-loaded or user submitted pieces of text and track their speed and accuracy.
 
-## Available Scripts
+## Important Links
 
-In the project directory, you can run:
+- [Server Repo](https://github.com/JoeyGarber/TypingTestAPI)
 
-### `npm start`
+## Installation instructions
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Fork and clone this repo
+2. Install dependencies with `npm install`
+3. Start the frontend server with `npm start`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Planning Story
 
-### `npm test`
+Hooks Typing Test Client was created to be half typing speed test, half study tool. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I really enjoyed doing existing online typing speed tests. The pieces of text were always about the rules of baseball or zebras, and after several rounds I found myself learning those facts from having typed them over and over. I decided I wanted to build a resource where users could learn other information that way, and Hooks Typing Test was born. 
 
-### `npm run build`
+## Design Process
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+First I allowed users to upload their own pieces of text. They could create, read, and delete pieces of text that they had uploaded, or read one of several preloaded pieces of text. Next, I build the typing functionality. Users could type along with one of those pieces of text, and watch the characters of that text turn red if their input was incorrect and green if it was correct. Keeping track of speed and accuracy was not too difficult to implement after that. Then I set the app up to log a user's results on a given test to the API, and implemented a page to view and sort those results by accuracy, words per minute, chronology, and title of test. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## User stories
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ - As a user, I'll be able to sign up, sign in, sign out, and change my password.
+ - As a user, I'll be able to create, read, and delete pieces of text for tests. 
+ - As a user, I'll be able to type along with pieces of text.
+ - As a user, I'd like to be able to type pieces of text that other users have written.
+ - As a user, I'd like to be able to view and sort my results.
 
-### `npm run eject`
+## Technologies Used
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- JavaScript
+- Express.js
+- MongoDb
+- Mongoose
+- React
+- Bootstrap
+- HTML/CSS
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Unsolved Problems
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- I would like users to be able to see and try tests that other users have created. The API is set up to handle that should a user be sent a link, but I have not built a "leaderboard."
+- Words per minute counts can be skewed for very short tests.
