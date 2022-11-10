@@ -45,42 +45,46 @@ export default function Results () {
 
   return (
     <>
-      <button type='button' onClick={() => setSortedField('createdAt')}>Chronologically</button>
-      <button type='button' onClick={() => console.log(results[0])}>Show me stuff</button>
-      <h3>Click Table Header to Sort Table</h3>
-      <table>
-        <thead>
-        <tr>
-          <th>
-            <button type='button' onClick={() => setSortedField('Title')}>Title</button>
-          </th>
-          <th>
-            <button type='button' onClick={() => setSortedField('WPM')}>WPM</button>
-          </th>
-          <th>
-            <button type='button' onClick={() => setSortedField('Accuracy')}>Accuracy</button>
-          </th>
-        </tr>
-        </thead>
-        <tbody>
-          {results && results.map(result => {
-            // Filter out results from deleted tests.
-            // Should not be a problem anyway, because results delete for
-            // deleted tests, but serves as a failsafe
-              if (result.Test) {
-                return (
-                  <tr key={result._id}>
-                  <td>{result.Test && result.Test.title}</td>
-                  <td>{result.WPM}</td>
-                  <td>{result.Accuracy}</td>
-                  </tr>
-                )
+      <div className="resultTable">
+        <h2>Results</h2>
+        <h5>Click Table Header to Sort Table</h5>
+        <table>
+          <thead>
+          <tr>
+            <th>
+              <button type='button' onClick={() => setSortedField('Title')}>Title</button>
+            </th>
+            <th>
+              <button type='button' onClick={() => setSortedField('WPM')}>WPM</button>
+            </th>
+            <th>
+              <button type='button' onClick={() => setSortedField('Accuracy')}>Accuracy</button>
+            </th>
+            <th>
+              <button type='button' onClick={() => setSortedField('createdAt')}>Chronologically</button>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+            {results && results.map(result => {
+              // Filter out results from deleted tests.
+              // Should not be a problem anyway, because results delete for
+              // deleted tests, but serves as a failsafe
+                if (result.Test) {
+                  return (
+                    <tr key={result._id}>
+                    <td>{result.Test && result.Test.title}</td>
+                    <td>{result.WPM}</td>
+                    <td>{result.Accuracy}</td>
+                    <td>{new Date(result.createdAt).toString()}</td>
+                    </tr>
+                  )
+                }
               }
-            }
-          )}
-        </tbody>
-      </table>
-      
+            )}
+          </tbody>
+        </table>
+      </div>
     </>
   )
 }

@@ -124,7 +124,7 @@ export default function Test () {
       <div className='test control is-expanded section'>
         <div className='typing-text'>
             <h2 className="timer">Seconds Left: {countDown}</h2>
-            <p>
+            <p className='col-sm-9 mx-auto'>
               {test && test.map((char, charIndex) => {
                 return (
                   <span key={charIndex}>{char}</span>
