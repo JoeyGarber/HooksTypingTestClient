@@ -4,7 +4,7 @@ import { showTest } from "../../api/tests"
 import { useAuth } from "../../contexts/authProvider"
 import { deleteTest } from "../../api/tests"
 import { createResult, deleteResults } from "../../api/results"
-import { Button } from 'semantic-ui-react'
+import Button from 'react-bootstrap/Button'
 
 export default function Test () {
   const SECONDS = 60
@@ -25,7 +25,7 @@ export default function Test () {
   const InputRef = useRef()
   const navigate = useNavigate()
 
-  let wpm = Math.round((correct * 12) / (SECONDS - countDown), 2)
+  let wpm = Math.round((correct * 12) / ((SECONDS - countDown)), 2)
   let accuracy = Math.round((correct / (correct + incorrect)) * 100)
 
   // Get the test when this component renders, as denoted by when the params.testId changes
@@ -124,7 +124,7 @@ export default function Test () {
       <div className='test control is-expanded section'>
         <div className='typing-text'>
             <h2 className="timer">Seconds Left: {countDown}</h2>
-            <p className='col-sm-9 mx-auto'>
+            <p className='col-sm-10 mx-auto'>
               {test && test.map((char, charIndex) => {
                 return (
                   <span key={charIndex}>{char}</span>
@@ -132,7 +132,7 @@ export default function Test () {
               })}
             </p>
         </div>
-        <p>Start typing to begin timer.</p>
+        <span className="helptext">Start typing to begin timer.</span>
         <input type='text' className='input' ref={InputRef} autoFocus disabled={disableInput} onKeyDown={checkMatch} onChange={start}/>
       </div>
       <div className='stats section'>
@@ -144,12 +144,12 @@ export default function Test () {
         </div>
         
       </div>
-      <div className="buttons">
+      <div className="d-grid gap-2 buttons">
         <Button onClick={resetTest}>Reset Test</Button>
-        {user && user._id === testUser && !confirmOpen && <Button onClick={() => setConfirmOpen(true)}>Delete test</Button>}
+        {user && user._id === testUser && !confirmOpen && <Button variant='dark' onClick={() => setConfirmOpen(true)}>Delete test</Button>}
         {confirmOpen && <>
-        <Button onClick={deleteUserTest}>Confirm</Button>
-        <Button onClick={() => setConfirmOpen(false)}>Cancel</Button>
+        <Button variant='danger' onClick={deleteUserTest}>Confirm</Button>
+        <Button variant='secondary' onClick={() => setConfirmOpen(false)}>Cancel</Button>
         </>}
       </div>
     </div>

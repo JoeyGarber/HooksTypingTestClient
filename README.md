@@ -44,3 +44,19 @@ First I allowed users to upload their own pieces of text. They could create, rea
 
 - I would like users to be able to see and try tests that other users have created. The API is set up to handle that should a user be sent a link, but I have not built a "leaderboard."
 - Words per minute counts can be skewed for very short tests.
+
+## Wireframe 
+
+[Wireframe](./photos/Wireframe.jpg)
+
+## ERD
+
+[ERD](./photos/ERD.jpg)
+
+## Screenshots
+
+[Test Chooser](./photos/Test%20Chooser.jpg)
+[Example Test](./photos/Lions%20Test.jpg)
+[Sign In](./photos/Sign%20In.jpg)
+[Create Test](./photos/Create%20Test.jpg)
+[Results](./photos/Results.jpg)

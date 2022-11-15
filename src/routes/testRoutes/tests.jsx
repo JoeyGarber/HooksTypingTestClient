@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, NavLink, Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { indexTests, indexUserTests } from '../../api/tests'
 import { useAuth } from '../../contexts/authProvider'

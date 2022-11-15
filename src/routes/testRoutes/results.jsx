@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from "../../contexts/authProvider"
 import { indexResults } from "../../api/results"
+import Button from 'react-bootstrap/Button'
 
 
 
@@ -13,7 +14,7 @@ export default function Results () {
   useEffect(() => {
     indexResults(user)
     .then(results => {
-      setResults(results.data.results)
+      setResults(results.data.results.reverse())
     })
   }, [user])
 
@@ -45,23 +46,23 @@ export default function Results () {
 
   return (
     <>
-      <div className="resultTable">
+      <div className="resultTableDiv">
         <h2>Results</h2>
         <h5>Click Table Header to Sort Table</h5>
-        <table>
+        <table className="resultTable">
           <thead>
           <tr>
             <th>
-              <button type='button' onClick={() => setSortedField('Title')}>Title</button>
+              <Button onClick={() => setSortedField('Title')}>Title</Button>
             </th>
             <th>
-              <button type='button' onClick={() => setSortedField('WPM')}>WPM</button>
+              <Button onClick={() => setSortedField('WPM')}>WPM</Button>
             </th>
             <th>
-              <button type='button' onClick={() => setSortedField('Accuracy')}>Accuracy</button>
+              <Button onClick={() => setSortedField('Accuracy')}>Accuracy</Button>
             </th>
             <th>
-              <button type='button' onClick={() => setSortedField('createdAt')}>Chronologically</button>
+              <Button onClick={() => setSortedField('createdAt')}>Chronologically</Button>
             </th>
           </tr>
           </thead>
