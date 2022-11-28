@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/HooksTypingTestClient/static/css/main.605e3c26.css",
-    "main.js": "/HooksTypingTestClient/static/js/main.71f09753.js",
+    "main.js": "/HooksTypingTestClient/static/js/main.df89d5a1.js",
     "index.html": "/HooksTypingTestClient/index.html",
     "main.605e3c26.css.map": "/HooksTypingTestClient/static/css/main.605e3c26.css.map",
-    "main.71f09753.js.map": "/HooksTypingTestClient/static/js/main.71f09753.js.map"
+    "main.df89d5a1.js.map": "/HooksTypingTestClient/static/js/main.df89d5a1.js.map"
   },
   "entrypoints": [
     "static/css/main.605e3c26.css",
-    "static/js/main.71f09753.js"
+    "static/js/main.df89d5a1.js"
   ]
 }
