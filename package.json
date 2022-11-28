@@ -1,5 +1,6 @@
 {
   "name": "hookstypingtestclient",
+  "homepage": "https://joeygarber.github.io/HooksTypingTestClient/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
