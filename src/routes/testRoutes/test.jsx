@@ -7,7 +7,7 @@ import { createResult, deleteResults } from "../../api/results"
 import Button from 'react-bootstrap/Button'
 
 export default function Test () {
-  const SECONDS = 60
+  const SECONDS = 6000
 
   const [test, setTest] = useState(null)
   const [testUser, setTestUser] = useState(null)
@@ -25,7 +25,7 @@ export default function Test () {
   const InputRef = useRef()
   const navigate = useNavigate()
 
-  let wpm = Math.round((correct * 12) / ((SECONDS - countDown)), 2)
+  let wpm = Math.round((correct * SECONDS / 5) / ((SECONDS - countDown)), 2)
   let accuracy = Math.round((correct / (correct + incorrect)) * 100)
 
   // Get the test when this component renders, as denoted by when the params.testId changes
@@ -62,7 +62,7 @@ export default function Test () {
             return prevCountdown - 1
           }
         })
-      }, 1000)
+      }, 10)
     }
   }
 
@@ -123,7 +123,7 @@ export default function Test () {
     <div className='app'>
       <div className='test control is-expanded section'>
         <div className='typing-text'>
-            <h2 className="timer">Seconds Left: {countDown}</h2>
+            <h2 className="timer">Seconds Left: {Math.floor(countDown / 100)}</h2>
             <p className='col-sm-10 mx-auto'>
               {test && test.map((char, charIndex) => {
                 return (
@@ -142,7 +142,6 @@ export default function Test () {
         <div className='column'>
           <h5>Accuracy: {accuracy || 0} %</h5>
         </div>
-        
       </div>
       <div className="d-grid gap-2 buttons">
         <Button onClick={resetTest}>Reset Test</Button>
