@@ -1,6 +1,6 @@
 let apiUrl
 const apiUrls = {
-  production: 'https://typingtestapi.onrender.com/',
+  production: 'https://typingtestapi.onrender.com',
   development: 'http://localhost:4741'
 }
 
