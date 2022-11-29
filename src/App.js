@@ -14,6 +14,7 @@ import Results from './routes/testRoutes/results.jsx'
 
 import { AuthProvider } from './contexts/authProvider';
 import { ProtectedRoute } from './routes/protectedRoute/protectedRoute';
+import { ToastContainerConfigured } from './messages/toastMessages';
 
 
 export default function App() {
@@ -39,6 +40,7 @@ export default function App() {
           />
         </Routes>
       </AuthProvider>
+      <ToastContainerConfigured />
     </main>
     </>
   )

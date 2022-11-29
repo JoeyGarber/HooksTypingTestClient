@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { signIn } from '../../api/auth'
-
+import { SuccessToast, ErrorToast } from "../../messages/toastMessages"
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -18,9 +18,10 @@ function SignIn () {
 
     signIn({email, password})
     .then((response) => setUser(response.data.user))
-    .then(() => console.log('Successfully signed in'))
-    .then(navigate('/tests'))
+    .then(() => SuccessToast('Sign In Successful!'))
+    .then(() => navigate('/tests'))
     .catch((error) => {
+      ErrorToast('Something Went Wrong! Sign In Failed!')
       setEmail('')
       setPassword('')
       console.log(error)
@@ -39,6 +40,7 @@ function SignIn () {
               type='email'
               name='email'
               placeholder='Enter email'
+              value={email}
               onChange={(event) => setEmail(event.target.value)}
             />
           </Form.Group>
@@ -49,6 +51,7 @@ function SignIn () {
               name='password'
               type='password'
               placeholder='Password'
+              value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
           </Form.Group >

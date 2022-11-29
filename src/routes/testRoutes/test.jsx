@@ -4,6 +4,7 @@ import { showTest } from "../../api/tests"
 import { useAuth } from "../../contexts/authProvider"
 import { deleteTest } from "../../api/tests"
 import { createResult, deleteResults } from "../../api/results"
+import { SuccessToast, ErrorToast } from "../../messages/toastMessages"
 import Button from 'react-bootstrap/Button'
 
 export default function Test () {
@@ -114,8 +115,13 @@ export default function Test () {
   const handleSubmit = (wpm, accuracy) => {
     if (user) {
       createResult(wpm, accuracy, params.testId, user)
-      .then(() => console.log('worked'))
-      .catch((error) => console.log(error))
+      .then(SuccessToast('Test Submitted Successfully!'))
+      .catch((error) => {
+        ErrorToast('Something Went Wrong! Test Submission Unsuccessful!')
+        console.log(error)
+      })
+    } else {
+      SuccessToast('Test Completed!')
     }
   }
 

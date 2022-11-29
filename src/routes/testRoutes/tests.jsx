@@ -4,6 +4,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import { indexTests, indexUserTests } from '../../api/tests'
 import { useAuth } from '../../contexts/authProvider'
 
+
 export default function Tests() {
   const [tests, setTests] = useState([])
   const [userTests, setUserTests] = useState([])
@@ -23,7 +24,9 @@ export default function Tests() {
   useEffect(() => {
     if (user) {
       indexUserTests(user)
-      .then(response => setUserTests(response.data.tests))
+      .then(response => {
+        setUserTests(response.data.tests)
+      })
       .catch(error => console.log(error))
     }
   }, [ user ])

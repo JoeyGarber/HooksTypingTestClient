@@ -5,6 +5,8 @@ import { signUp, signIn } from '../../api/auth'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { useAuth } from '../../contexts/authProvider'
+import { SuccessToast, ErrorToast } from "../../messages/toastMessages"
+
 
 function SignUp (props) {
   const [email, setEmail] = useState('')
@@ -19,9 +21,10 @@ function SignUp (props) {
     signUp({email, password, passwordConfirmation})
     .then(() => signIn({email, password, passwordConfirmation}))
     .then((response) => setUser(response.data.user))
-    .then(() => console.log('Sign Up Success'))
+    .then(() => SuccessToast('Sign Up Successful!'))
     .then(() => navigate('/tests'))
     .catch((error) => {
+      ErrorToast('Something Went Wrong! Sign Up Failed!')
       setEmail('')
       setPassword('')
       setPasswordConfirmation('')
