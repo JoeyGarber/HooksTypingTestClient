@@ -45,6 +45,7 @@ function SignUp (props) {
               type='email'
               name='email'
               placeholder='Enter email'
+              value={email}
               onChange={(event) => setEmail(event.target.value)}
             />
           </Form.Group>
@@ -55,6 +56,7 @@ function SignUp (props) {
               name='password'
               type='password'
               placeholder='Password'
+              value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
           </Form.Group >
@@ -65,6 +67,7 @@ function SignUp (props) {
               name='passwordConfirmation'
               type='password'
               placeholder='Confirm Password'
+              value={passwordConfirmation}
               onChange={(event) => setPasswordConfirmation(event.target.value)}
             />
           </Form.Group>
