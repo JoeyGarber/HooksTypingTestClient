@@ -51,10 +51,6 @@ export default function Test () {
     }
   }, [timerRunning])
 
-  useEffect(() => {
-    setCountDown(SECONDS)
-  }, [SECONDS])
-
   const start = () => {
     // Correct and incorrect update before onChange
     // This makes it so the timer starts only after user has typed their first registered char
@@ -135,6 +131,7 @@ export default function Test () {
 
   const setClock = (event) => {
     setSECONDS(event.target.value)
+    setCountDown(event.target.value)
   }
 
   return (
