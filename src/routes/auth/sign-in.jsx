@@ -22,7 +22,6 @@ function SignIn () {
     .then(() => navigate('/tests'))
     .catch((error) => {
       ErrorToast('Something Went Wrong! Sign In Failed!')
-      setEmail('')
       setPassword('')
       console.log(error)
     })
@@ -55,7 +54,7 @@ function SignIn () {
               onChange={(event) => setPassword(event.target.value)}
             />
           </Form.Group >
-          <Button className='signBt' type='submit'>Submit</Button>
+          <Button className='formButton' type='submit'>Submit</Button>
         </Form>
       </div>
     </div>

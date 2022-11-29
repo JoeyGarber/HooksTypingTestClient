@@ -25,7 +25,6 @@ function SignUp (props) {
     .then(() => navigate('/tests'))
     .catch((error) => {
       ErrorToast('Something Went Wrong! Sign Up Failed!')
-      setEmail('')
       setPassword('')
       setPasswordConfirmation('')
       console.error(error)
@@ -71,7 +70,7 @@ function SignUp (props) {
               onChange={(event) => setPasswordConfirmation(event.target.value)}
             />
           </Form.Group>
-          <Button className='signBt' type='submit'>Submit</Button>
+          <Button className='formButton' type='submit'>Submit</Button>
         </Form>
       </div>
     </div>

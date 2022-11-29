@@ -85,3 +85,11 @@ th, td {
 .helptext {
   font-size: 75%;
 }
+
+.formButton {
+  margin: 0.5em 0;
+}
+
+.form-label {
+  margin: 0.5em 0;
+}

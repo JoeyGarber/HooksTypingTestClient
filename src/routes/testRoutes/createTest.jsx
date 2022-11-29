@@ -48,7 +48,7 @@ export default function CreateTest() {
           onChange={(event) => setText(event.target.value)}
           />
         </Form.Group>
-        <Button className='createBt' type='submit'>
+        <Button className='formButton' type='submit'>
           Submit
         </Button>
       </Form>

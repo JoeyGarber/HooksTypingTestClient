@@ -19,6 +19,7 @@ export default function Test () {
   const [timerRunning, setTimerRunning] = useState(null)
   const [disableInput, setDisableInput] = useState(false)
   const [confirmOpen, setConfirmOpen] = useState(false)
+  const [showHelpText, setShowHelpText] = useState(true)
 
   const params = useParams()
   const { user }  = useAuth()
@@ -50,9 +51,10 @@ export default function Test () {
 
   const start = () => {
     // Correct and incorrect update before onChange
-    // This makes it so the timer starts only after user has typed their first char
+    // This makes it so the timer starts only after user has typed their first registered char
     if ((correct === 1 && incorrect === 0) || (correct === 0 && incorrect === 1)) {
       setTimerRunning(true)
+      setShowHelpText(false)
       IntervalRef.current = setInterval(() => {
         setCountDown((prevCountdown) => {
           if (prevCountdown === 0) {
@@ -94,6 +96,19 @@ export default function Test () {
     }
   }
 
+  const handleSubmit = (wpm, accuracy) => {
+    if (user) {
+      createResult(wpm, accuracy, params.testId, user)
+      .then(SuccessToast('Test Submitted Successfully!'))
+      .catch((error) => {
+        ErrorToast('Something Went Wrong! Test Submission Unsuccessful!')
+        console.log(error)
+      })
+    } else {
+      SuccessToast('Test Completed!')
+    }
+  }
+
   const deleteUserTest = () => {
     deleteTest(params.testId, user)
     .then(deleteResults(params.testId, user))
@@ -112,19 +127,6 @@ export default function Test () {
     document.querySelector('.typing-text p').querySelectorAll('span').forEach(span => span.classList.remove('correct', 'incorrect'))
   }
 
-  const handleSubmit = (wpm, accuracy) => {
-    if (user) {
-      createResult(wpm, accuracy, params.testId, user)
-      .then(SuccessToast('Test Submitted Successfully!'))
-      .catch((error) => {
-        ErrorToast('Something Went Wrong! Test Submission Unsuccessful!')
-        console.log(error)
-      })
-    } else {
-      SuccessToast('Test Completed!')
-    }
-  }
-
   return (
     <div className='app'>
       <div className='test control is-expanded section'>
@@ -138,8 +140,8 @@ export default function Test () {
               })}
             </p>
         </div>
-        <span className="helptext">Start typing to begin timer.</span>
         <input type='text' className='input' ref={InputRef} autoFocus disabled={disableInput} onKeyDown={checkMatch} onChange={start}/>
+        {showHelpText ? <span className="helptext">Start typing to begin timer.</span> : <p></p>}
       </div>
       <div className='stats section'>
         <div className='column'>
