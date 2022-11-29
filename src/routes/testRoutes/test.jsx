@@ -21,6 +21,7 @@ export default function Test () {
   const [disableInput, setDisableInput] = useState(false)
   const [confirmOpen, setConfirmOpen] = useState(false)
   const [showHelpText, setShowHelpText] = useState(true)
+  const [showWPM, setShowWPM] = useState(true)
 
   const params = useParams()
   const { user }  = useAuth()
@@ -139,11 +140,13 @@ export default function Test () {
   return (
     <div className='app'>
         <div className="settings">
-          <Form.Select aria-label="Default select" onChange={setClock}>
+          <Form.Select aria-label="Default select" onChange={setClock} disabled={timerRunning}>
             <option value="6000">1 Minute</option>
             <option value="12000">2 Minutes</option>
             <option value="18000">3 Minutes</option>
+            <option value="30000">5 Minutes</option>
           </Form.Select>
+          <Button onClick={() => setShowWPM(!showWPM)}>{showWPM ? 'Hide WPM' : 'Show WPM'}</Button>
         </div>
       <div className='test control is-expanded section'>
         <div className='typing-text'>
@@ -161,7 +164,7 @@ export default function Test () {
       </div>
       <div className='stats section'>
         <div className='column'>
-          <h5>Words per minute (one word = 5 chars): {wpm || 0}</h5>
+          {showWPM && <h5>Words per minute (one word = 5 chars): {wpm || 0}</h5>}
         </div>
         <div className='column'>
           <h5>Accuracy: {accuracy || 0} %</h5>
