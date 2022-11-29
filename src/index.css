@@ -93,3 +93,9 @@ th, td {
 .form-label {
   margin: 0.5em 0;
 }
+
+.settings {
+  display: flex;
+  width: 20%;
+  padding: 0.5em;
+}

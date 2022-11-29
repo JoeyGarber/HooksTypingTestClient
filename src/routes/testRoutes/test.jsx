@@ -6,10 +6,11 @@ import { deleteTest } from "../../api/tests"
 import { createResult, deleteResults } from "../../api/results"
 import { SuccessToast, ErrorToast } from "../../messages/toastMessages"
 import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
 
 export default function Test () {
-  const SECONDS = 6000
 
+  const [SECONDS, setSECONDS] = useState(6000)
   const [test, setTest] = useState(null)
   const [testUser, setTestUser] = useState(null)
   const [correct, setCorrect] = useState(0)
@@ -27,7 +28,7 @@ export default function Test () {
   const InputRef = useRef()
   const navigate = useNavigate()
 
-  let wpm = Math.round((correct * SECONDS / 5) / ((SECONDS - countDown)), 2)
+  let wpm = Math.round((correct * 1200) / (SECONDS - countDown), 2)
   let accuracy = Math.round((correct / (correct + incorrect)) * 100)
 
   // Get the test when this component renders, as denoted by when the params.testId changes
@@ -48,6 +49,10 @@ export default function Test () {
       clearInterval(IntervalRef.current)
     }
   }, [timerRunning])
+
+  useEffect(() => {
+    setCountDown(SECONDS)
+  }, [SECONDS])
 
   const start = () => {
     // Correct and incorrect update before onChange
@@ -127,8 +132,19 @@ export default function Test () {
     document.querySelector('.typing-text p').querySelectorAll('span').forEach(span => span.classList.remove('correct', 'incorrect'))
   }
 
+  const setClock = (event) => {
+    setSECONDS(event.target.value)
+  }
+
   return (
     <div className='app'>
+        <div className="settings">
+          <Form.Select aria-label="Default select" onChange={setClock}>
+            <option value="6000">1 Minute</option>
+            <option value="12000">2 Minutes</option>
+            <option value="18000">3 Minutes</option>
+          </Form.Select>
+        </div>
       <div className='test control is-expanded section'>
         <div className='typing-text'>
             <h2 className="timer">Seconds Left: {Math.floor(countDown / 100)}</h2>
