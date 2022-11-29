@@ -41,7 +41,7 @@ export default function Test () {
       })
   }, [params.testId])
 
-  // When the clock hits zero or the user types all the text, stop the interval, try to submit (if user is logged in)
+  // When the clock hits zero or the user types all the text, stop the interval, try to submit
   useEffect(() => {
     if (timerRunning === false) {
       clearInterval(IntervalRef.current)
