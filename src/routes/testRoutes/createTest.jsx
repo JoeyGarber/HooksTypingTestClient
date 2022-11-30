@@ -41,8 +41,9 @@ export default function CreateTest() {
           <Form.Label><span style={{ color: 'red' }}>*</span>Text</Form.Label>
           <Form.Control
           required
-          type='text'
-          name='text'
+          as='textarea'
+          type='textarea'
+          name='textarea'
           value={text}
           placeholder='Test Text'
           onChange={(event) => setText(event.target.value)}

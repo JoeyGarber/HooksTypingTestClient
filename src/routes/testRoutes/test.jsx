@@ -36,7 +36,7 @@ export default function Test () {
   useEffect(() => {
       showTest(params.testId, user)
       .then(response => {
-        setTest(response.data.test.body.split(''))
+        setTest(response.data.test.body.replace(/(\s*)(\n)+(\s*)/g, '\n ').split(''))
         setTestUser(response.data.test.owner)
       })
   }, [params.testId])
@@ -75,7 +75,7 @@ export default function Test () {
     const characters = document.querySelector('.typing-text p').querySelectorAll('span')
 
     // non-character keys will be undefined && the test won't error when you finish it
-    if (event.key && characters[charIndex] && event.key !== 'Shift' && event.key !== 'Backspace') {
+    if (event.key && characters[charIndex] && event.key !== 'Shift' && event.key !== 'Backspace' && event.key !== 'Enter') {
       if (event.key === characters[charIndex].innerHTML) {
         characters[charIndex].classList.add('correct')
         setCorrect(correct + 1)
@@ -92,6 +92,8 @@ export default function Test () {
       }
       characters[charIndex - 1].classList.remove('correct', 'incorrect')
       setCharIndex(charIndex - 1)
+    } else if (event.key === 'Enter') {
+      console.log(event.key)
     } else if (!characters[charIndex]) {
       setTimerRunning(false)
       setDisableInput(true)
@@ -150,9 +152,15 @@ export default function Test () {
             <h2 className="timer">Seconds Left: {Math.floor(countDown / 100)}</h2>
             <p className='col-sm-10 mx-auto'>
               {test && test.map((char, charIndex) => {
-                return (
-                  <span key={charIndex}>{char}</span>
-                )
+                if (char !== '\n') {
+                  return (
+                    <span key={charIndex}>{char}</span>
+                  )
+                } else {
+                  return (
+                  <hr className="paragraph-break" />
+                  )
+                }
               })}
             </p>
         </div>
