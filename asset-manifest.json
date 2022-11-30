@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/HooksTypingTestClient/static/css/main.81101d8e.css",
-    "main.js": "/HooksTypingTestClient/static/js/main.081fc883.js",
+    "main.css": "/HooksTypingTestClient/static/css/main.8553d19e.css",
+    "main.js": "/HooksTypingTestClient/static/js/main.eb8e9002.js",
     "index.html": "/HooksTypingTestClient/index.html",
-    "main.81101d8e.css.map": "/HooksTypingTestClient/static/css/main.81101d8e.css.map",
-    "main.081fc883.js.map": "/HooksTypingTestClient/static/js/main.081fc883.js.map"
+    "main.8553d19e.css.map": "/HooksTypingTestClient/static/css/main.8553d19e.css.map",
+    "main.eb8e9002.js.map": "/HooksTypingTestClient/static/js/main.eb8e9002.js.map"
   },
   "entrypoints": [
-    "static/css/main.81101d8e.css",
-    "static/js/main.081fc883.js"
+    "static/css/main.8553d19e.css",
+    "static/js/main.eb8e9002.js"
   ]
 }
