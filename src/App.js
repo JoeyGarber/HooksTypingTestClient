@@ -13,6 +13,7 @@ import Test from './routes/testRoutes/test';
 import Results from './routes/testRoutes/results.jsx'
 
 import { AuthProvider } from './contexts/authProvider';
+import { SettingsProvider } from './contexts/settingsProvider';
 import { ProtectedRoute } from './routes/protectedRoute/protectedRoute';
 import { ToastContainerConfigured } from './messages/toastMessages';
 
@@ -23,6 +24,7 @@ export default function App() {
     <>
     <main>
       <AuthProvider>
+      <SettingsProvider>
         <Header />
         <Routes>
           <Route path='sign-up' element={<SignUp/>} />
@@ -39,6 +41,7 @@ export default function App() {
           <Route path='*' element={<Tests />}
           />
         </Routes>
+      </SettingsProvider>
       </AuthProvider>
       <ToastContainerConfigured />
     </main>

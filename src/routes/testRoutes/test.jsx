@@ -4,24 +4,25 @@ import { showTest } from "../../api/tests"
 import { useAuth } from "../../contexts/authProvider"
 import { deleteTest } from "../../api/tests"
 import { createResult, deleteResults } from "../../api/results"
+import { useSettings } from "../../contexts/settingsProvider"
 import { SuccessToast, ErrorToast } from "../../messages/toastMessages"
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
 export default function Test () {
 
-  const [SECONDS, setSECONDS] = useState(6000)
+  
   const [test, setTest] = useState(null)
   const [testUser, setTestUser] = useState(null)
   const [correct, setCorrect] = useState(0)
   const [incorrect, setIncorrect] = useState(0)
   const [charIndex, setCharIndex] = useState(0)
-  const [countDown, setCountDown] = useState(SECONDS)
   const [timerRunning, setTimerRunning] = useState(null)
   const [disableInput, setDisableInput] = useState(false)
   const [confirmOpen, setConfirmOpen] = useState(false)
   const [showHelpText, setShowHelpText] = useState(true)
-  const [showWPM, setShowWPM] = useState(true)
+  const { SECONDS, setSECONDS, countDown, setCountDown, showWPM, setShowWPM } = useSettings()
+  
 
   const params = useParams()
   const { user }  = useAuth()
@@ -140,6 +141,7 @@ export default function Test () {
     <div className='app'>
         <div className="settings">
           <Form.Select aria-label="Default select" onChange={setClock} disabled={timerRunning}>
+            <option value="" disabled selected>Select New Time Limit</option>
             <option value="6000">1 Minute</option>
             <option value="12000">2 Minutes</option>
             <option value="18000">3 Minutes</option>
